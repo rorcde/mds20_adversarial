@@ -1,8 +1,8 @@
 # mds20_adversarial
 This is the repository for the Models of Sequence Data 2020 Edition for the project Generating Natural Language Adversarial Examples on a Large Scale with Generative Models. 
 
-## Structure of the project:
-- TBD
+## The goal of the project:
+The goal is to create an algorithm for adversarial examples generation for sequences based on transformers and examine a defense against it.
 
 ## TODO: 
 - Implement the paper. 
@@ -11,8 +11,14 @@ This is the repository for the Models of Sequence Data 2020 Edition for the proj
 ## Installation and running:
 - TBD
 
-## Requirements:
-- TBD
+## Tasks and requirements:
+
+1) Run the proposed DILMA attack for at least one NLP dataset
+2) Measure the attack success rate, perplexity
+3) Evaluate the validity rate by manual processing of generated texts
+4) Retrain the model to generate adversarial examples without local adaptation to each sequence
+5) Search for the universal attack in the embedded space
+6) Code should be in AllenNLP, PyTorch. You can use all code you can find.
 
 ## Existing implementation:
 - Provided by authors of paper using `AlienNLP` framework. We were unable to test it yet. 
