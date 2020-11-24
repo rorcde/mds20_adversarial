@@ -22,17 +22,44 @@ class TextCNN(nn.Module):
         return final
 
 class GRU_Text(nn.Module):
-    def __init__(self, vocab_size, emb_dim, hidden_dim, out_dim, dropout, pad_idx):
+    def __init__(self,
+                 vocab_size,
+                 emb_dim,
+                 hidden_dim,
+                 out_dim,
+                 dropout,
+                 pad_idx
+                 ):
         super().__init__()
-        self.embedding = nn.Embedding(vocab_size, emb_dim, padding_idx=pad_idx)
-        self.rnn = nn.GRU(embedding_dim,hidden_dim,num_layers=n_layers, bidirectional=True, dropout=dropout)
-        self.fc = nn.Linear(hidden_dim * 2, output_dim)
+        self.embedding = nn.Embedding(
+            vocab_size,
+            emb_dim,
+            padding_idx=pad_idx
+            )
+        self.rnn = nn.GRU(
+            emb_dim,
+            hidden_dim,
+            num_layers=1,
+            bidirectional=True
+            )
+        self.fc = nn.Linear(hidden_dim * 2, out_dim)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text, text_lengths):
+        #text = [sent len, batch size]
         embedded = self.dropout(self.embedding(text))
-        packed_embedded = nn.utils.rnn.pack_padded_sequence(embedded, text_lengths)
-        packed_output, (hidden, cell) = self.rnn(packed_embedded)
+        #embedded = [sent len, batch size, emb dim]
+        #pack sequence
+        packed_embedded = nn.utils.rnn.pack_padded_sequence(embedded, text_lengths.detach().cpu())
+        packed_output, hidden = self.rnn(packed_embedded)
+        #unpack sequence
         output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
+        #output = [sent len, batch size, hid dim * num directions]
+        #output over padding tokens are zero tensors
+        #hidden = [num layers * num directions, batch size, hid dim]
+        #cell = [num layers * num directions, batch size, hid dim]
+        #concat the final forward (hidden[-2,:,:]) and backward (hidden[-1,:,:]) hidden layers
+        #and apply dropout
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
+        #hidden = [batch size, hid dim * num directions]
         return self.fc(hidden)
