@@ -1,22 +1,38 @@
+import numpy as np
 import torch
-import torch.nn as nn
 
 
 def trec_accuracy(preds, y):
     """
-    Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
+    Calculate multiclass average accuracy per batch
+    Inputs:
+        predictions - torch.tensor of shape [batch_size, n_classes]
+        y - torch.tensor of shape [batch_size, 1]
+    Output:
+        acc - average accuracy (float)
     """
     correct = []
-    #round predictions to the closest integer
+    # round predictions to the closest integer
     rounded_preds = torch.round(torch.softmax(preds, dim=1))
-    for x, yy in zip(rounded_preds, y): 
-        correct.append((torch.argmax(x) == yy).float()) #convert into float for division
+    for x, yy in zip(rounded_preds, y):
+        correct.append((torch.argmax(x) == yy).float())  # convert into float for division
     acc = np.sum(correct) / len(correct)
     return acc
 
 
-
 def train_model(model, iterator, optimizer, criterion):
+    '''
+    train language model (1 epoch)
+    Inputs:
+        model - torch model
+        iterator - data iterator
+        optimizer - torch optimizer
+        criterion - torch loss function
+    Outputs:
+        average epoch loss
+        average epoch accuracy
+    '''
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     epoch_loss = 0
     epoch_acc = 0
     model.train()
@@ -32,8 +48,18 @@ def train_model(model, iterator, optimizer, criterion):
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
 
-
 def evaluate(model, iterator, criterion):
+    '''
+    Evaluate model on dataset.
+    Inputs:
+        model - torch model
+        iterator - dataset iterator
+        criterion - torch loss function
+    Outputs:
+        average epoch loss [float]
+        average epoch accuracy [float]
+    '''
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     epoch_loss = 0
     epoch_acc = 0
     model.eval()
@@ -45,3 +71,14 @@ def evaluate(model, iterator, criterion):
             epoch_loss += loss.item()
             epoch_acc += acc.item()
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
+
+
+def epoch_time(start_time, end_time):
+    '''
+    Calculate time elapsed by each epoch.
+    '''
+    elapsed_time = end_time - start_time
+    elapsed_mins = int(elapsed_time / 60)
+    elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
+    return elapsed_mins, elapsed_secs
+
