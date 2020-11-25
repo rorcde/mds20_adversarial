@@ -6,13 +6,13 @@ The goal is to create an algorithm for adversarial examples generation for seque
 
 ## TODO: 
 - Implement the paper:
-  -- Implement and train classification models - DONE (Daniil)
-  -- Implement and train language model - DONE (Daniil)
-  -- Implement Deep Levenstein Model - TBD (Margarita)
-  -- Implement ST Gumbel-Softmax Estimator - TBD (Margarita)
-  -- Compose DILMA Model - TBD (Daniil / Margarita) 
+  - Implement and train classification models - DONE (Daniil)
+  - Implement and train language model - DONE (Daniil)
+  - Implement Deep Levenstein Model - TBD (Margarita)
+  - Implement ST Gumbel-Softmax Estimator - TBD (Margarita)
+  - Compose DILMA Model - TBD (Daniil / Margarita) 
 - Run experiments:
-  -- Run proposed DILMA attack for TREC dataset - TBD
+  - Run proposed DILMA attack for TREC dataset - TBD
 - Modify the existing architecture to be able to generate adversarial examples without fine-tuning.
 
 ## Installation and running:
@@ -28,7 +28,7 @@ The goal is to create an algorithm for adversarial examples generation for seque
 6) Code should be in AllenNLP, PyTorch. You can use all code you can find.
 
 ## Existing implementation:
-- Provided by authors of paper using `AlienNLP` framework. We were unable to test it yet. 
+- Provided by authors of paper using `AlienNLP` framework, testing is done by Alexander. 
 - Assumes to use `Docker` for running 
 
 ## Ideas on the implementation: (by Daniil)
