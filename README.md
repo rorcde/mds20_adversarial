@@ -5,7 +5,14 @@ This is the repository for the Models of Sequence Data 2020 Edition for the proj
 The goal is to create an algorithm for adversarial examples generation for sequences based on transformers and examine a defense against it.
 
 ## TODO: 
-- Implement the paper. 
+- Implement the paper:
+  -- Implement and train classification models - DONE (Daniil)
+  -- Implement and train language model - DONE (Daniil)
+  -- Implement Deep Levenstein Model - TBD (Margarita)
+  -- Implement ST Gumbel-Softmax Estimator - TBD (Margarita)
+  -- Compose DILMA Model - TBD (Daniil / Margarita) 
+- Run experiments:
+  -- Run proposed DILMA attack for TREC dataset - TBD
 - Modify the existing architecture to be able to generate adversarial examples without fine-tuning.
 
 ## Installation and running:
