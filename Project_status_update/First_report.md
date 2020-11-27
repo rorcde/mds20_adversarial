@@ -22,7 +22,7 @@ Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transform
 
 _Fig 2. NLP adversarial attack_
 
- $$x'=\{x'_1, \dots, x'_n\}$$ from logits $$\{p_1, \dots, p_n\}$$ obtained from the language model. Surrogate classifier consists of two pretrained NLP models: CNN text classifier (target model) and bidirectional GRU model. Both models are used for adversarial attack success evaluation.
+ $x'=\{x'_1, \dots, x'_n\}$ from logits $\{p_1, \dots, p_n\}$ obtained from the language model. Surrogate classifier consists of two pretrained NLP models: CNN text classifier (target model) and bidirectional GRU model. Both models are used for adversarial attack success evaluation.
 
 Let’s briefly describe how it is working:
 
