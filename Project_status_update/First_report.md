@@ -18,4 +18,4 @@ The paper "Differentiable Language Model Adversarial Attacks on Categorical Sequ
 
 Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  as _Straight-Through  Gumbel  Estimator_)  samples  sequences
 
-![NLP adversarial attack](Project_status_update/images/NLP adversarial attack.png "Fig 2. NLP adversarial attack")
+![NLP adversarial attack](mds20_adversarial/Project_status_update/images/NLP adversarial attack.png "Fig 2. NLP adversarial attack")
