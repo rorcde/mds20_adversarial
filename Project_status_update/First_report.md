@@ -18,9 +18,11 @@ The paper "Differentiable Language Model Adversarial Attacks on Categorical Sequ
 
 Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  as _Straight-Through  Gumbel  Estimator_)  samples  sequences
 
+
 ![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/NLP%20adversarial%20attack.png 'Fig 1. NLP adversarial attack')
 
 _Fig 1. NLP adversarial attack_
+
 
  ![input_in_link_formula](https://latex.codecogs.com/svg.latex?x%27=\{x%27_1,%20\dots,%20x%27_n\}$%20from%20logits%20$\{p_1,%20\dots,%20p_n\}) obtained from the language model. Surrogate classifier consists of two pretrained NLP models: CNN text classifier (target model) and bidirectional GRU model. Both models are used for adversarial attack success evaluation.
 
@@ -47,6 +49,7 @@ Also, for more DILMA model details one can take a look at Figure 3, where the pr
 ![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/Dilma_model_arch.png 'Fig 2. DILMA model architecture')
 
 _Fig 2. DILMA model architecture_
+
 
 ## **3 Project related challenges and tasks**
 
@@ -83,3 +86,8 @@ Referenced papers:  : [Differentiable Language Model Adversarial Attacks on Cate
 1. I. Fursov and A. Zaytsev and N. Kluchnikov and A. Kravchenko and E. Burnaev, DifferentiableLanguage Model Adversarial Attacks on Categorical Sequence Classifier, 2020
 
 2. Yankun Ren, Jianbin Lin, Siliang Tang, Jun Zhou, Shuang Yang, Yuan Qi, and Xiang Ren.Generating natural language adversarial examples on a large scale with generative models,2020.
+
+
+![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/Dilma_arch_impl.png 'Fig 3. DILMA model architecture implementation')
+
+_Fig 3. DILMA model implementation_
