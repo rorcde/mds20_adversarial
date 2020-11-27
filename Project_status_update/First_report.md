@@ -27,3 +27,16 @@ _Fig 2. NLP adversarial attack_
 Let’s briefly describe how it is working:
 
 1. Pretrained _Masked Language Model_(MLM) provides a conditional distribution 𝑝𝜃(𝑥' ̈|𝑥) for given input sequence𝑥, where𝑥is original sequence of tokens and𝑥 ̈is adversarialsequence.
+
+2. Given a conditional distribution we can sample sequences from it ![](https://latex.codecogs.com/svg.latex?x%27%20\sim%20p_{\theta}(x%27|x)). So doesthe sampler(_denoted as ST Gumbel Estimator_).
+
+3. At this stage dierentiable loss function components are calculated:
+
+     Given adversarial sequence we feed it into _Deep Levenstein_ model to measure dif-ference between the original sequence𝑥and the adversarial one 𝑥'. From this part we obtain ![](https://latex.codecogs.com/svg.latex?DL(x%27,x)).
+
+Adversarial sequence is also fed into a substitute classiffier (denoted as _SurrogateClassiffier_). Since we are working with a black-box scenario, no access to the targetedmodel provided. Therefore, substitute classiffier’s scores are used (we assume that ![](https://latex.codecogs.com/svg.latex?C_{y}(x%27)%20\approx%20C^{true}_{y}(x%27)), where ![](https://latex.codecogs.com/svg.latex?C^{true}_{y}(x%27)) is targeted (original) classiffier prediction on 𝑥' and ![](https://latex.codecogs.com/svg.latex?C_{y}(x%27)) is substitute classiffier’s prediction).  Ideally, we want our classiffier make the following ![](C\left(\mathbf{x}_{i}\right) \neq C\left(\mathbf{x}_{i}^{\prime}\right)), in that case an adversarial attack is considered successful.
+
+4. Finally, we obtain the loss function provided below. Notice that this function is differen-tiable, therefore, model BPTT is possible. 
+
+![](https://latex.codecogs.com/svg.latex?\begin{equation}%20%20%20%20L\left(\mathbf{x}^{\prime},%20\mathbf{x},%20y\right)=\beta\left(1-D%20L\left(\mathbf{x}^{\prime},%20\mathbf{x}\right)\right)^{2}-\log%20\left(1-C_{y}\left(\mathbf{x}^{\prime}\right)\right)%20%20%20%20\end{equation})
+
