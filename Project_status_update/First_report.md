@@ -18,9 +18,9 @@ The paper "Differentiable Language Model Adversarial Attacks on Categorical Sequ
 
 Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  as _Straight-Through  Gumbel  Estimator_)  samples  sequences
 
-![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/NLP%20adversarial%20attack.png 'Fig 2. NLP adversarial attack')
+![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/NLP%20adversarial%20attack.png 'Fig 1. NLP adversarial attack')
 
-_Fig 2. NLP adversarial attack_
+_Fig 1. NLP adversarial attack_
 
  ![input_in_link_formula](https://latex.codecogs.com/svg.latex?x%27=\{x%27_1,%20\dots,%20x%27_n\}$%20from%20logits%20$\{p_1,%20\dots,%20p_n\}) obtained from the language model. Surrogate classifier consists of two pretrained NLP models: CNN text classifier (target model) and bidirectional GRU model. Both models are used for adversarial attack success evaluation.
 
@@ -38,5 +38,48 @@ Adversarial sequence is also fed into a substitute classiffier (denoted as _Surr
 
 4. Finally, we obtain the loss function provided below. Notice that this function is differen-tiable, therefore, model BPTT is possible. 
 
-![](https://latex.codecogs.com/svg.latex?\begin{equation}%20%20%20%20L\left(\mathbf{x}^{\prime},%20\mathbf{x},%20y\right)=\beta\left(1-D%20L\left(\mathbf{x}^{\prime},%20\mathbf{x}\right)\right)^{2}-\log%20\left(1-C_{y}\left(\mathbf{x}^{\prime}\right)\right)%20%20%20%20\end{equation})
+![](https://latex.codecogs.com/svg.latex?%20L\left(\mathbf{x}^{\prime},%20\mathbf{x},%20y\right)=\beta\left(1-D%20L\left(\mathbf{x}^{\prime},%20\mathbf{x}\right)\right)^{2}-\log%20\left(1-C_{y}\left(\mathbf{x}^{\prime}\right)\right)) [1]
 
+5. Update LM’s weights according to the loss function (update ![](https://latex.codecogs.com/svg.latex?\theta_{i-1}) using gradient descentand get new weights ![](https://latex.codecogs.com/svg.latex?\theta_{i})) via backward pass value.  Note that this updating processtake into account two terms: maximising the probability drop and minimising the editdistance. So it should be as close to 1 as possible.
+
+Also, for more DILMA model details one can take a look at Figure 3, where the process describedabove is shown more precisely.
+
+![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/Dilma_model_arch.png 'Fig 2. DILMA model architecture')
+
+_Fig 2. DILMA model architecture_
+
+## **3 Project related challenges and tasks**
+
+**DILMA model nuance:** each update procedure for each x starts from the pretrained LM parameters ![](https://latex.codecogs.com/svg.latex?\theta_{0}). An adversarial attack is based on a masked language model (MLM). DILMAuse fine tuned parameters of MLM by optimising a weighted sum of two differentiable termsbased on a surrogate distance between sequences and a surrogate classifier model scores. So,the main challenge is to retrain the model to generate adversarial examples without localadaptation to each sequence.
+
+**Implementation:** we need to reimplement model using PyTorch deep learning framework.
+
+**Discrete sequences are more challenging than Pictures:** There are two main challengesfor adversarial attacks on discrete sequence models: a discrete space of possible objects and acomplex denition of a semantically coherent sequence.
+
+**Finding universal approach for attack:** Our updated approach can be based on generationof adversarial sequences like in paper "Generating Natural Language Adversarial Exampleson a Large Scale with Generative Models" (Yankun Ren et al., 2020).  Model generates textadversarial examples from scratch, adversarial examples are not restricted to existing inputs.Pretrained model can generate an unlimited number of adversarial examples without any inputdata. By the way, model generates adversarial texts without querying the attacked model, thusthe generation procedure became faster. However, they use RNNs seq2seq models and lengthof sequences they can process is limited.
+
+## **4 Contributions**
+
+### **Daniil Moskovskiy**
+
+Literature review, model architecture implementation on PyTorch, main model training, taskdistribution for teammates, running the proposed DILMA attack for at one NLP dataset (TRECdataset).
+
+### **Margarita Sharkova**
+
+Literature review, model architecture implementation on PyTorch, classifiers (target and substitute) training, report preparation, retraining the model to generateadversarial examples without local adaptation to each sequence.
+
+### **Aleksandr Esin**
+
+Literature review, model result evaluation (attack success rate, perplexity, manual processingof generated texts), building a graphics for the model and results visualization; report andpresentation preparation.
+
+## **5 Links**
+
+The implementation will be available at our team’s github repository.
+
+Referenced papers:  : [Differentiable Language Model Adversarial Attacks on Categorical Se-quence Classifers ](https://arxiv.org/pdf/2006.11078.pdf), [PyTorch framework](https://pytorch.org/).
+
+### References
+
+1. I. Fursov and A. Zaytsev and N. Kluchnikov and A. Kravchenko and E. Burnaev, DifferentiableLanguage Model Adversarial Attacks on Categorical Sequence Classifier, 2020
+
+2. Yankun Ren, Jianbin Lin, Siliang Tang, Jun Zhou, Shuang Yang, Yuan Qi, and Xiang Ren.Generating natural language adversarial examples on a large scale with generative models,2020.
