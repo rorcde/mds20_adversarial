@@ -16,4 +16,4 @@ Adversarial examples aim at causing target model to make a mistake on prediction
 
 The paper "Differentiable Language Model Adversarial Attacks on Categorical SequenceClassifiers" (Fursov et al., 2020) is the main paper related to our project. Authors introduce anapproach to generate adversarial examples based on fine-tuning Masked Language Modellingcalled DILMA (DIfferentiable Language Model Attack). The architecture of the model can beseen at Figure 2. Few words about its constituents.
 
-Language model (denoted as italic Generator: Transformer italic on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  asStraight-Through  Gumbel  Estimator)  samples  sequences
+Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  as _Straight-Through  Gumbel  Estimator_)  samples  sequences
