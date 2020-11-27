@@ -19,4 +19,11 @@ The paper "Differentiable Language Model Adversarial Attacks on Categorical Sequ
 Language model (denoted as  _Generator: Transformer_ on Figure 2) is a transformer sequence2sequencemasked language model based on BERT. It is pretrained in BERT-style (masked languagemodelling). Sampler  (denoted  as _Straight-Through  Gumbel  Estimator_)  samples  sequences
 
 ![NLP adversarial attack](https://github.com/rodrigorivera/mds20_adversarial/blob/main/Project_status_update/images/NLP%20adversarial%20attack.png 'Fig 2. NLP adversarial attack')
+
 _Fig 2. NLP adversarial attack_
+
+𝑥' = {𝑥'1,...,𝑥.n}from logits{𝑝1,...,𝑝𝑛}obtained from the language model. Surrogate classifier consists of two pretrained NLP models: CNN text classifier (target model) and bidirectional GRU model. Both models are used for adversarial attack success evaluation.
+
+Let’s briefly describe how it is working:
+
+1. Pretrained _Masked Language Model_(MLM) provides a conditional distribution 𝑝𝜃(𝑥' ̈|𝑥) for given input sequence𝑥, where𝑥is original sequence of tokens and𝑥 ̈is adversarialsequence.
