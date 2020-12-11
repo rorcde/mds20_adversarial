@@ -8,12 +8,12 @@ The goal is to create an algorithm for adversarial examples generation for seque
 - Implement the paper:
   - Implement and train classification models - DONE (Daniil)
   - Implement and train language model - DONE (Daniil)
-  - Implement Deep Levenstein Model - TBD (Margarita)
-  - Implement ST Gumbel-Softmax Estimator - TBD (Margarita)
+  - Implement and train Deep Levenstein Model - Done (Margarita)
+  - Implement ST Gumbel-Softmax Estimator - Done (Daniil)
   - Compose DILMA Model - TBD (Daniil / Margarita) 
 - Run experiments:
   - Run proposed DILMA attack for TREC dataset - TBD
-- Modify the existing architecture to be able to generate adversarial examples without fine-tuning.
+
 
 ## Installation and running:
 - TBD
