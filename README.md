@@ -6,17 +6,19 @@ The goal is to create an algorithm for adversarial examples generation for seque
 
 ## TODO: 
 - Implement the paper:
-  - Implement and train classification models - DONE (Daniil)
-  - Implement and train language model - DONE (Daniil)
-  - Implement and train Deep Levenstein Model - Done (Margarita)
-  - Implement ST Gumbel-Softmax Estimator - Done (Daniil)
-  - Compose DILMA Model - TBD (Daniil / Margarita) 
+  - Load and process dataset (using Datasets library for NLP taks) (Done)
+  
+  - Use pre-trained BertMaskedLM as language model (Done)
+  - Create dataset for Deep Levenstein model with random pair sampling and sequence modifying (Done)
+  - Implement and train Deep Levenstein Model (Done)
+  - Implement and train Substitute classifier and Target classifier (Done)
+  - Implement Sampling fool attack on toy example (Done)
+  - Compose DILMA Model (Done)
+  
 - Run experiments:
-  - Run proposed DILMA attack for TREC dataset - TBD
+  - Run proposed DILMA attack for TREC dataset (TD)
 
 
-## Installation and running:
-- TBD
 
 ## Tasks and requirements:
 
@@ -31,10 +33,17 @@ The goal is to create an algorithm for adversarial examples generation for seque
 - Provided by authors of paper using `AlienNLP` framework, testing is done by Alexander. 
 - Assumes to use `Docker` for running 
 
+## Dataset description 
+
+The [Text REtrieval Conference (TREC) Question Classification dataset](https://github.com/huggingface/datasets/blob/master/datasets/trec/trec.py) contains 5500 labeled questions in training set and another 500 for test set. The dataset has 6 labels, 47 level-2 labels. Average length of each sentence is 10, vocabulary size of 8700.
+
+Data are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500 questions from TREC 10 which serves as the test set.
+
 ## Ideas on the implementation: (by Daniil)
 - Models used in the project need to be trained separately as the proposed approach uses pretrained model. All models are going to be available in the specific folder `models`
-- Datasets used in the paper are available at PyTorch
-- Specific functions will be stored separately at folder `utils`
+- TREC Dataset used in paper is available on 
+- Specific functions are stored at folder `utils`
+- Pre-trained model weights and created dataset for Deep Lev are stored in ``data``
 - Examples of usage and experiments will be done in Jupyter Notebooks and will be stored at folder `examples`
 
 ## Our team 
