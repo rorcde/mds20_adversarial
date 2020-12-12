@@ -29,16 +29,13 @@ class Deep_lev(torch.nn.Module):
         out, (ht, ct) = self.encoder(embedded_sequence)
         return ht[-1]
 
-    def forward(self, sequence_a, sequence_b, distance):
+    def forward(self, sequence_a, sequence_b, distance = None):
         embedded_sequence_a = self.encode_sequence(sequence_a)
         embedded_sequence_b = self.encode_sequence(sequence_b)
         diff = torch.abs(embedded_sequence_a - embedded_sequence_b)
         representation = torch.cat([embedded_sequence_a, embedded_sequence_b, diff], dim=-1)
 
         approx_distance = self.linear(representation)
-        output_dict = {"distance": approx_distance}
 
-        if distance is not None:
-            output_dict["loss"] = self._loss(approx_distance.view(-1), distance.view(-1))
-        return output_dict
+        return approx_distance
 
