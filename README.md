@@ -17,7 +17,10 @@ The goal is to create an algorithm for adversarial examples generation for seque
   
 - Run experiments:
   - Run proposed DILMA attack for TREC dataset (TD)
-
+  
+## Important:
+- Please note that due to the huge size of the models used in this project, testing can only be done on Google Colab (or at your local PC if have 4-5 GBs of VRAM :))
+- Therefore, to check our results one may run `DILMA` notebook from the corresponding folder. Please note that this notebook uses pretrained models, that can be downloaded from `data` folder
 
 
 ## Tasks and requirements:
@@ -29,9 +32,6 @@ The goal is to create an algorithm for adversarial examples generation for seque
 5) Search for the universal attack in the embedded space
 6) Code should be in AllenNLP, PyTorch. You can use all code you can find.
 
-## Existing implementation:
-- Provided by authors of paper using `AlienNLP` framework, testing is done by Alexander. 
-- Assumes to use `Docker` for running 
 
 ## Dataset description 
 
