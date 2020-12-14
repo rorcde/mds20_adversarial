@@ -34,7 +34,7 @@ def parse_arguments():
 
 
 if __name__ == '__main__':
-	args = parse_arguments()
+	args = parse_arguments(batch_size=args.batch_size)
 
 	trainloader, testloader, tokenizer = prepare_trec_dataset()
 
