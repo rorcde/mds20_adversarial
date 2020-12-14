@@ -1,4 +1,5 @@
 import sys
+import os
 sys.path.append('../')
 import time
 from models.classifiers import TextGRU
@@ -25,8 +26,8 @@ def parse_arguments():
 		help='dropout for RNN model, default=0.1')
 	parser.add_argument('--learning_rate', type=float, default=0.001,
 		help='learning_rate for RNN model training, default = 0.001')
-	parser.add_argument('--path_to_save', type=str, default='./data/',
-		help='path to save the trained model, default= "./data/"')
+	parser.add_argument('--path_to_save', type=str, default='../data/',
+		help='path to save the trained model, default= "../data/"')
 	parser.add_argument('--n_epochs', type=int, default=50,
 		help='number of epochs to train rnn model, default=50')
 	args = parser.parse_args()
@@ -34,9 +35,9 @@ def parse_arguments():
 
 
 if __name__ == '__main__':
-	args = parse_arguments(batch_size=args.batch_size)
-
-	trainloader, testloader, tokenizer = prepare_trec_dataset()
+	args = parse_arguments()
+	PATH = os.path.join(args.path_to_save)
+	trainloader, testloader, tokenizer = prepare_trec_dataset(batch_size=args.batch_size)
 
 	model = TextGRU(
 		vocab_size=tokenizer.vocab_size,
@@ -65,7 +66,7 @@ if __name__ == '__main__':
 		epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 		if valid_loss < best_valid_loss:
 			best_valid_loss = valid_loss
-			torch.save(model.state_dict(), args.path_to_save+'test.pt')
+			torch.save(model.state_dict(), PATH+'textrnn_trec.pt')
 		print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
 		print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
 		print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
