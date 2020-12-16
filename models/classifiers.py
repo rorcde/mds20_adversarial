@@ -31,6 +31,18 @@ class TextCNN(nn.Module):
         self.fc = nn.Linear(len(filter_sizes) * n_filters, output_dim)
         self.dropout = nn.Dropout(dropout)
 
+    def get_embeddings(self, onehots):
+        embs = torch.stack([torch.matmul(v, self.embedding.weight) for v in onehots])
+        return embs
+
+    def forward_on_embeddings(self, inputs):
+        embs = self.get_embeddings(inputs)
+        out = [F.relu(c(embs.permute(0, 2, 1))) for c in self.convs]
+        out_pool = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in out]
+        cat = self.dropout(torch.cat(out_pool, dim=1))
+        final = self.fc(cat)
+        return final
+
     def forward(self, text):
         embs = self.embedding(text)
         embs = embs.permute(0, 2, 1)
@@ -62,6 +74,18 @@ class TextGRU(nn.Module):
         self.rnn = nn.GRU(emb_dim, hidden_dim, num_layers=1, bidirectional=True, dropout=dropout)
         self.fc = nn.Linear(hidden_dim * 2, out_dim)
         self.dropout = nn.Dropout(dropout)
+
+    def get_embeddings(self, onehots):
+        embs = torch.stack([torch.matmul(v, self.embedding.weight) for v in onehots])
+        return embs
+
+    def forward_on_embeddings(self, inputs):
+        embs = self.get_embeddings(inputs)
+        packed_embedded = nn.utils.rnn.pack_padded_sequence(embs, text_lengths, enforce_sorted=False)
+        packed_output, hidden = self.rnn(packed_embedded)
+        output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
+        hidden = self.dropout(torch.cat((hidden[-2, :, :], hidden[-1, :, :]), dim=1))
+        return self.fc(hidden)
 
     def forward(self, text, text_lengths):
         embedded = self.dropout(self.embedding(text))
