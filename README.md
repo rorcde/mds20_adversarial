@@ -6,10 +6,10 @@ The goal is to create an algorithm for adversarial examples generation for seque
 
 ## TODO: 
 - Implement the paper:
-  - Load and process dataset (using Datasets library for NLP taks) (Done)
+  - Load and process dataset (using Datasets library for NLP tasks) (Done)
   
   - Use pre-trained BertMaskedLM as language model (Done)
-  - Create dataset for Deep Levenstein model with random pair sampling and sequence modifying (Done)
+  - Create a dataset for Deep Levenstein model with random pair sampling and sequence modifying (Done)
   - Implement and train Deep Levenstein Model (Done)
   - Implement and train Substitute classifier and Target classifier (Done)
   - Implement Sampling fool attack on toy example (Done)
@@ -19,8 +19,8 @@ The goal is to create an algorithm for adversarial examples generation for seque
   - Run proposed DILMA attack for TREC dataset (TD)
   
 ## Important:
-- Please note that due to the huge size of the models used in this project, testing can only be done on Google Colab (or at your local PC if have 4-5 GBs of VRAM :))
-- Therefore, to check our results one may run `DILMA` notebook from the corresponding folder. Please note that this notebook uses pretrained models, that can be downloaded from `data` folder
+- Please note that due to the huge size of the models used in this project, testing can only be done on Google Colab (or at your local PC if you have 4-5 GBs of VRAM :))
+- Therefore, to check our results, one may run the `DILMA` notebook from the corresponding folder. Please note that this notebook uses pretrained models that can be downloaded from the `data` folder
 
 
 ## Tasks and requirements:
@@ -35,16 +35,16 @@ The goal is to create an algorithm for adversarial examples generation for seque
 
 ## Dataset description 
 
-The [Text REtrieval Conference (TREC) Question Classification dataset](https://github.com/huggingface/datasets/blob/master/datasets/trec/trec.py) contains 5500 labeled questions in training set and another 500 for test set. The dataset has 6 labels, 47 level-2 labels. Average length of each sentence is 10, vocabulary size of 8700.
+The [Text REtrieval Conference (TREC) Question Classification dataset](https://github.com/huggingface/datasets/blob/master/datasets/trec/trec.py) contains 5500 labeled questions in the training set and another 500 for the test set. The dataset has 6 labels, 47 level-2 labels. The average length of each sentence is 10, with a vocabulary size of 8700.
 
-Data are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500 questions from TREC 10 which serves as the test set.
+Data are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and 500 questions from TREC 10, which serves as the test set.
 
 ## Ideas on the implementation: (by Daniil)
-- Models used in the project need to be trained separately as the proposed approach uses pretrained model. All models are going to be available in the specific folder `models`
-- TREC Dataset used in paper is available on 
-- Specific functions are stored at folder `utils`
-- Pre-trained model weights and created dataset for Deep Lev are stored in ``data``
-- Examples of usage and experiments will be done in Jupyter Notebooks and will be stored at folder `examples`
+- Models used in the project need to be trained separately as the proposed approach uses a pretrained model. All models are going to be available in the specific folder `models.`
+- TREC Dataset used in the paper is available on 
+- Specific functions are stored at folder `utils.`
+- Pre-trained model weights and created dataset for Deep Lev are stored in ``data. ``
+- Examples of usage and experiments will be done in Jupyter Notebooks and stored in folder `examples.`
 
 ## Our team 
 - Alexander Esin (@aleksandryessin)
