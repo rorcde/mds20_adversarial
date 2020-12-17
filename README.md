@@ -16,22 +16,19 @@ The goal is to create an algorithm for adversarial examples generation for seque
   - Compose DILMA Model (Done)
   
 - Run experiments:
-  - Run proposed DILMA attack for TREC dataset (TD)
+  - Run proposed DILMA attack for TREC dataset (Done)
   
 ## Important:
 - Please note that due to the huge size of the models used in this project, testing can only be done on Google Colab (or at your local PC if you have 4-5 GBs of VRAM :))
 - Therefore, to check our results, one may run the `DILMA` notebook from the corresponding folder. Please note that this notebook uses pretrained models that can be downloaded from the `data` folder
 
-
-## Tasks and requirements:
-
-1) Run the proposed DILMA attack for at least one NLP dataset
-2) Measure the attack success rate, perplexity
-3) Evaluate the validity rate by manual processing of generated texts
-4) Retrain the model to generate adversarial examples without local adaptation to each sequence
-5) Search for the universal attack in the embedded space
-6) Code should be in AllenNLP, PyTorch. You can use all code you can find.
-
+## Running DILMA:
+ - Run `DILMA.ipynb` notebook on Google Colab. To run all the stuff one needs to download pretrained models from the `data` of this repository and scripts `classifiers` and `deep_lev` from the `models` folder of this repository. 
+ - To retrain classifiers:
+  - `git clone https://github.com/rodrigorivera/mds20_adversarial`
+  - `pip install requirements.txt`
+  - run either `train_cnn` or `train_rnn` from `scripts` folder, example of usage:
+    - ```python train_cnn.py --batch_size 64 --emb_dim 100 --n_filters 8 --learning_rate 0.01 --path_to_save ../data/```
 
 ## Dataset description 
 
@@ -40,11 +37,11 @@ The [Text REtrieval Conference (TREC) Question Classification dataset](https://g
 Data are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and 500 questions from TREC 10, which serves as the test set.
 
 ## Ideas on the implementation: (by Daniil)
-- Models used in the project need to be trained separately as the proposed approach uses a pretrained model. All models are going to be available in the specific folder `models.`
+- Models used in the project need to be trained separately as the proposed approach uses a pretrained model. All models are going to be available in the specific folder `models.` - Done 
 - TREC Dataset used in the paper is available on 
-- Specific functions are stored at folder `utils.`
-- Pre-trained model weights and created dataset for Deep Lev are stored in ``data. ``
-- Examples of usage and experiments will be done in Jupyter Notebooks and stored in folder `examples.`
+- Specific functions are stored at folder `utils.` - Done
+- Pre-trained model weights and created dataset for Deep Lev are stored in ``data. `` - Done
+- Examples of usage and experiments will be done in Jupyter Notebooks and stored in folder `notebooks.` - Done
 
 ## Our team 
 - Alexander Esin (@aleksandryessin)
