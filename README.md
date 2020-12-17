@@ -39,9 +39,9 @@ Data are collected from four sources: 4,500 English questions published by USC (
 ## Ideas on the implementation: (by Daniil)
 - Models used in the project need to be trained separately as the proposed approach uses a pretrained model. All models are going to be available in the specific folder `models.` - Done 
 - TREC Dataset used in the paper is available on 
-- Specific functions are stored at folder `utils.` - Done
-- Pre-trained model weights and created dataset for Deep Lev are stored in ``data. `` - Done
-- Examples of usage and experiments will be done in Jupyter Notebooks and stored in folder `notebooks.` - Done
+- Specific functions are stored at folder `utils` - Done
+- Pre-trained model weights and created dataset for Deep Lev are stored in ``data`` - Done
+- Examples of usage and experiments will be done in Jupyter Notebooks and stored in folder `notebooks` - Done
 
 ## Our team 
 - Alexander Esin (@aleksandryessin)
